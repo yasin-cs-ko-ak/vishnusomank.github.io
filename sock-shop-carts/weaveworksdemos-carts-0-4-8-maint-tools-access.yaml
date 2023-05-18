@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: carts-weaveworksdemos-carts-0-4-8-maint-tools-access
+  namespace: sock-shop
+spec:
+  action: Audit
+  message: restricted maintenance tool access attempt detected
+  process:
+    matchDirectories:
+    - dir: /sbin/
+      recursive: true
+  selector:
+    matchLabels:
+      name: carts
+  severity: 1
+  tags:
+  - PCI_DSS
+  - MITRE

@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: catalogue-db-weaveworksdemos-catalogue-db-0-3-0-mysqldump-bin-exec
+  namespace: sock-shop
+spec:
+  action: Audit
+  message: Alert! mysqldump command execution detected.
+  process:
+    matchPaths:
+    - path: /usr/bin/mysqldump
+  selector:
+    matchLabels:
+      name: catalogue-db
+  severity: 10
+  tags:
+  - MySQL
+  - mysqldump
+  - process

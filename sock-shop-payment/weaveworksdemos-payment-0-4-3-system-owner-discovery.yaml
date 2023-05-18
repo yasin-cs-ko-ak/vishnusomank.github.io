@@ -1,0 +1,21 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: payment-weaveworksdemos-payment-0-4-3-system-owner-discovery
+  namespace: sock-shop
+spec:
+  action: Block
+  message: System owner discovery command execution denied
+  process:
+    matchPaths:
+    - path: /usr/bin/who
+    - path: /usr/bin/w
+    - path: /usr/bin/id
+    - path: /usr/bin/whoami
+  selector:
+    matchLabels:
+      name: payment
+  severity: 3
+  tags:
+  - MITRE
+  - MITRE_T1082_system_information_discovery

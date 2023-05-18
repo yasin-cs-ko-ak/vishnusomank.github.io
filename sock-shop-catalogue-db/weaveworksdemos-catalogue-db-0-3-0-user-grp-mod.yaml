@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: catalogue-db-weaveworksdemos-catalogue-db-0-3-0-user-grp-mod
+  namespace: sock-shop
+spec:
+  action: Block
+  message: Notification! useradd and groupadd command executions denied!
+  process:
+    matchPaths:
+    - path: /usr/sbin/groupadd
+    - path: /usr/sbin/useradd
+  selector:
+    matchLabels:
+      name: catalogue-db
+  severity: 1
+  tags:
+  - MySQL
+  - CIS

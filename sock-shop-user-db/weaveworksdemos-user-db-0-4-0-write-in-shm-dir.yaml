@@ -1,0 +1,20 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: user-db-weaveworksdemos-user-db-0-4-0-write-in-shm-dir
+  namespace: sock-shop
+spec:
+  action: Block
+  file:
+    matchDirectories:
+    - dir: /dev/shm/
+      readOnly: true
+      recursive: true
+  message: Alert! write to /dev/shm folder prevented.
+  selector:
+    matchLabels:
+      name: user-db
+  severity: 5
+  tags:
+  - MITRE_execution
+  - MITRE

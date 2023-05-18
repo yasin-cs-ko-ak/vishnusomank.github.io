@@ -1,0 +1,19 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: queue-master-weaveworksdemos-queue-master-0-3-1-maint-tools-access
+  namespace: sock-shop
+spec:
+  action: Audit
+  message: restricted maintenance tool access attempt detected
+  process:
+    matchDirectories:
+    - dir: /sbin/
+      recursive: true
+  selector:
+    matchLabels:
+      name: queue-master
+  severity: 1
+  tags:
+  - PCI_DSS
+  - MITRE
